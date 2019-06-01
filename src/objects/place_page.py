@@ -1,5 +1,4 @@
 from selenium.webdriver.common.keys import Keys
-import logging
 
 
 class Place:
@@ -27,6 +26,7 @@ class Place:
         tempate_b = Place.driver.find_element_by_xpath("(//table/tbody/tr//a[@class=\"troop_template_selector\"])[2]")
         attack = Place.driver.find_element_by_id("target_attack")
         distance = int(float(target_distance.text[12: 14]))
+        #TODO stale elements problem
         if distance <= 5 and repeat == 0:
             tempate_a.click()
             attack.click()

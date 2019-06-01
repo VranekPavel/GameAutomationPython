@@ -2,15 +2,15 @@ import unittest
 import time
 import random
 from selenium import webdriver
-from src.objects.place_page import *
 from src.objects.login_page import login_function
 from src.objects.village_page import Village
+from src.objects.place_page import Place
 from src.functions.file_methods import *
 from src.functions.comparator import *
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-class PythonOrgSearch(unittest.TestCase):
+class TestClass(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()
@@ -19,7 +19,7 @@ class PythonOrgSearch(unittest.TestCase):
         wait = WebDriverWait(driver, 10)
         login_function(driver, wait)
 
-    def test_search_in_python_org(self):
+    def test_loot(self):
         driver = self.driver
         repeat = 0
         village = Village(driver)
