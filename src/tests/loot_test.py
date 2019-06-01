@@ -1,4 +1,6 @@
 import unittest
+import time
+import random
 from selenium import webdriver
 from src.objects.place_page import *
 from src.objects.login_page import login_function
@@ -26,7 +28,9 @@ class PythonOrgSearch(unittest.TestCase):
         villages = read_file("loot.txt")
         villages.sort(key=lambda e: count_distance(e, village.get_coordinates()))
         for target in villages:
-            place.select_village(target[0: 8])
+            time.sleep(random.random() / 100)
+            if not place.select_village(target[0: 8]):
+                continue
             repeat = place.select_troops_and_attack(repeat)
 
     def tearDown(self):
