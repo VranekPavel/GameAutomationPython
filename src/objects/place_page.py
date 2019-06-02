@@ -21,17 +21,18 @@ class Place:
             return True
 
     def select_troops_and_attack(self, repeat):
-        target_distance = Place.driver.find_element_by_xpath("//div[@class=\"target-select-autocomplete\"]//span[@class=\"village-distance\"]")
-        tempate_a = Place.driver.find_element_by_xpath("(//table/tbody/tr//a[@class=\"troop_template_selector\"])[1]")
-        tempate_b = Place.driver.find_element_by_xpath("(//table/tbody/tr//a[@class=\"troop_template_selector\"])[2]")
-        attack = Place.driver.find_element_by_id("target_attack")
-        distance = int(float(target_distance.text[12: 14]))
-        #TODO stale elements problem
+        target_distance = "//div[@class=\"target-select-autocomplete\"]//span[@class=\"village-distance\"]"
+        template_a = "(//table/tbody/tr//a[@class=\"troop_template_selector\"])[1]"
+        template_b = "(//table/tbody/tr//a[@class=\"troop_template_selector\"])[2]"
+        attack = "target_attack"
+        carry_amout = "//form[@id=\"command-data-form\"]//span[@title = \"Unese\"]/.."
+        distance = int(float(Place.driver.find_element_by_xpath(target_distance).text[12: 14]))
+
         if distance <= 5 and repeat == 0:
-            tempate_a.click()
-            attack.click()
+            Place.driver.find_element_by_xpath(template_a).click()
+            Place.driver.find_element_by_id(attack).click()
             try:
-                if int(Place.driver.find_element_by_xpath("//form[@id=\"command-data-form\"]//span[@title = \"Unese\"]/..").text) > 300:
+                if int(Place.driver.find_element_by_xpath(carry_amout).text) > 300:
                     Place.driver.find_element_by_id("troop_confirm_go").click()
                 else:
                     Place.driver.execute_script("window.history.go(-1)")
@@ -43,18 +44,18 @@ class Place:
                     pass
                     #TODO vynechává vesnici kam by bylo posláno malé vojsko
             except:
-                tempate_b.click()
-                attack.click()
+                Place.driver.find_element_by_xpath(template_b).click()
+                Place.driver.find_element_by_id(attack).click()
                 try:
                     Place.driver.find_element_by_id("troop_confirm_go").click()
                     repeat = 1
                 except:
                     pass
         else:
-            tempate_b.click()
-            attack.click()
+            Place.driver.find_element_by_xpath(template_b).click()
+            Place.driver.find_element_by_id(attack).click()
             try:
-                if int(Place.driver.find_element_by_xpath("//form[@id=\"command-data-form\"]//span[@title = \"Unese\"]")) > 300:
+                if int(Place.driver.find_element_by_xpath(carry_amout).text) > 300:
                     Place.driver.find_element_by_id("troop_confirm_go").click()
                 else:
                     repeat = 2
