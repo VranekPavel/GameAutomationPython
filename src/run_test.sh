@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python src/tests/tests.py
+python tests/tests.py
