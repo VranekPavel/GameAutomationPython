@@ -2,7 +2,7 @@ import unittest
 import time
 import random
 from selenium import webdriver
-from src.objects.login_page import login_function
+from src.objects import login_page
 from src.objects.village_page import Village
 from src.objects.place_page import Place
 from src.functions.file_methods import *
@@ -17,7 +17,7 @@ class TestClass(unittest.TestCase):
         driver = self.driver
         driver.implicitly_wait(10)
         wait = WebDriverWait(driver, 10)
-        login_function(driver, wait)
+        login_page.login_function(driver, wait)
 
     def test_loot(self):
         driver = self.driver
@@ -27,6 +27,7 @@ class TestClass(unittest.TestCase):
         place = Place(driver)
         villages = read_file("loot.txt")
         villages.sort(key=lambda e: count_distance(e, village.get_coordinates()))
+        #TODO implement repeat stop condition
         for target in villages:
             time.sleep(random.random() / 100)
             if not place.select_village(target[0: 8]):

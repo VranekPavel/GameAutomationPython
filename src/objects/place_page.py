@@ -42,7 +42,7 @@ class Place:
                     except:
                         pass
                     pass
-                    #TODO vynechává vesnici kam by bylo posláno malé vojsko
+                    #TODO vynechava vesnici kam by bylo poslano male vojsko
             except:
                 Place.driver.find_element_by_xpath(template_b).click()
                 Place.driver.find_element_by_id(attack).click()
